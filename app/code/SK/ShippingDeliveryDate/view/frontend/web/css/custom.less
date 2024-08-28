@@ -1,0 +1,33 @@
+@primary-color: #072; // Define your custom color here
+
+.exptected-delivery {
+    border-top: none;
+    color: @primary-color;
+    display: inline-block;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.sales-order-view {
+    .exptected-delivery {
+        margin: 0 0 20px;
+    }
+}
+
+.table-checkout-shipping-method {
+    tbody {
+        td {
+            &:first-child {
+                display: table-cell;
+                width: max-content;
+            }
+            &.exptected-delivery {
+                border-top: none;
+                padding: 0 0 15px;
+            }
+        }
+    }
+}
+
+
+

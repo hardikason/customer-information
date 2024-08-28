@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+
+            <group id="general" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="display_expected_delivery" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="bank_holidays" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bank Holidays</label>
+                    <comment>Enter bank holidays in DD/MM/YYYY format, one per line.</comment>
+                </field>
+            </group>
+
+            <group id="warehouse" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Warehouse Dispatch Configurations</label>
+                <field id="off_days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Off Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <comment>Select the days considered as weekends.</comment>
+                </field>
+                <field id="cutoff_time" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cut Off Time Field</label>
+                    <frontend_model>SK\ShippingDeliveryDate\Block\Adminhtml\System\Config\Form\Field\Time</frontend_model>
+                    <backend_model>SK\ShippingDeliveryDate\Model\Config\Backend\Time</backend_model>
+                    <comment>Enter the time (HH:MM) and select AM/PM.</comment>
+                </field>
+            </group>
+
+            <group id="flatrate">
+                <field id="off_days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Off Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <comment>Select the days considered as weekends.</comment>
+                </field>
+                <field id="delivery_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order delivers in 'x' shipping days</label>
+                    <comment>Enter number of days that will require to ship the order.</comment>
+                </field>
+            </group>
+
+            <group id="tablerate">
+                <field id="off_days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Off Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <comment>Select the days considered as weekends.</comment>
+                </field>
+                <field id="delivery_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order delivers in 'x' shipping days</label>
+                    <comment>Enter number of days that will require to ship the order.</comment>
+                </field>
+            </group>
+
+            <group id="freeshipping">
+                <field id="off_days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Off Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <comment>Select the days considered as weekends.</comment>
+                </field>
+                <field id="delivery_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order delivers in 'x' shipping days</label>
+                    <comment>Enter number of days that will require to ship the order.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
