@@ -4,6 +4,10 @@
         <column xsi:type="date" name="shipping_delivery_date" nullable="true" comment="Shipping Delivery Date"/>
     </table>
 
+    <table name="sales_order_grid">
+        <column xsi:type="date" name="shipping_delivery_date" nullable="true" comment="Shipping Delivery Date"/>
+    </table>
+
     <table name="quote_address">
         <column xsi:type="date" name="shipping_delivery_date" nullable="true" comment="Delivery Date" />
     </table>

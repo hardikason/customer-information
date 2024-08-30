@@ -8,4 +8,12 @@
         <plugin name="save_shipping_delivery_date_to_quote_address"
                 type="SK\ShippingDeliveryDate\Plugin\Model\SaveDeliveryDateToQuote" />
     </type>
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="shipping_delivery_date" xsi:type="string">sales_order.shipping_delivery_date</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
