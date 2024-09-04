@@ -1,0 +1,146 @@
+@white-color: #fff;
+@black-color: #000;
+@eee-color: #eee;
+
+.customerinformation-index-index {
+    background: @black-color;
+    .column.main {
+        background-color: @black-color;
+        color: @white-color;
+        .page-title-wrapper {
+            .page-title {
+                display: none;
+            }
+        }
+        .customer-information {
+            .message {
+                width: 90%;
+                p {
+                    margin-bottom: 0;
+                }
+            }
+            .box-information {
+                background: @white-color;
+                border-radius: 3px;
+                box-shadow: 0 3px 18px rgba(0, 0, 0, .05);
+                box-sizing: border-box;
+                color: @black-color;
+                margin: 0 0 20px;
+                padding: 20px;
+                position: relative;
+                width: 97%;
+                .box-title {
+                    border-bottom: 1px solid @eee-color;
+                    display: block;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: initial;
+                    margin-bottom: 20px;
+                    padding-bottom: 20px;
+                    width: 100%;
+                    .action-remove {
+                        position: absolute;
+                        right: 3%;
+                        a {
+                            background: url(../../images/icons8-remove-30.png) no-repeat;
+                            cursor: pointer;
+                            display: block;
+                            height: 30px;
+                            width: 30px;
+                        }
+                    }
+
+                }
+
+                .box-content {
+                    margin: 0 0 45px;
+                    label {
+                        display: block;
+                    }
+                    .order-rows {
+                        display: block;
+                        margin: 0 0 10px;
+                        position: relative;
+                        .order-links {
+                            display: flex;
+                            label {
+                                cursor: pointer;
+                            }
+                        }
+                        .action {
+                            display: flex;
+                            position: absolute;
+                            right: 0;
+                            width: auto;
+                            .remove {
+                                a {
+                                    background: url(../../images/icons8-remove-30.png) no-repeat;
+                                    cursor: pointer;
+                                    display: block;
+                                    height: 30px;
+                                    width: 30px;
+                                }
+                            }
+                            .view {
+                                a {
+                                    background: url(../../images/icons8-view-details-30.png) no-repeat;
+                                    cursor: pointer;
+                                    display: block;
+                                    height: 30px;
+                                    width: 30px;
+                                }
+                            }
+                        }
+
+                        .order-details {
+                            border-radius: 3px;
+                            box-shadow: 0 0 8px @eee-color;
+                            display: none;
+                            margin: 25px 0;
+                            padding: 10px;
+
+                            h3 {
+                                margin-top: 1rem;
+                            }
+                        }
+                    }
+                }
+
+                .pages {
+                    .items {
+                        li {
+                            span {
+                                color: @black-color;
+                            }
+                        }
+                        .item {
+                            .pages-item-next {
+                                a {
+                                    background: @black-color;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.page-layout-2columns-left {
+        .sidebar {
+            &.sidebar-additional {
+                background: @white-color;
+                margin-bottom: 20px;
+                margin-right: 2%;
+                padding: 10px 20px;
+                width: 20.3%;
+            }
+        }
+    }
+
+    a {
+        color: @black-color;
+    }
+}
+

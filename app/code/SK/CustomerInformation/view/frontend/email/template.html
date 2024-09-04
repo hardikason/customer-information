@@ -1,0 +1,32 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * @author : Sonali Kosrabe <sonalikosrabe@outlook.com>
+ */
+-->
+<!--@vars {
+"var subject": "Email Subject",
+"var emailToName": "Email to Name",
+"var customer.name": "Customer Name",
+"var customer.email": "Customer Email",
+"var orderId": "order Id"
+} @-->
+ <!--@subject {{var subject }}@-->
+
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">
+    {{trans "Dear %emailToName," emailToName=$emailToName}}
+</p>
+
+<p>{{trans 'The following customer has requested to have their data deleted:'}}</p>
+<p>{{trans "Name: %name" name=$customer.name}}</p>
+<p>{{trans "Email: %email" email=$customer.email}}</p>
+
+{{depend orderId}}
+<p>{{trans "Customer Requested for Order ID: #%orderId" orderId=$orderId}}</p>
+{{/depend}}
+
+{{template config_path="design/email/footer_template"}}

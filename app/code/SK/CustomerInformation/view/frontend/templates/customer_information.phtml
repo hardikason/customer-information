@@ -1,0 +1,123 @@
+<?php
+/**
+ * $block SK\CustomerInformation\Block\Account\Info
+ * $viewModel SK\CustomerInformation\ViewModel\CustomerInformation
+ */
+
+$viewModel = $block->getData('viewModel');
+
+$allowToRemoveRequest = $viewModel->getAllowToRemoveRequest();
+?>
+
+<div class="customer-information" data-bind="scope: 'customer-information'">
+     <!-- ko if: isMessageVisible -->
+    <div class="message" data-bind="visible: isMessageVisible">
+        <p data-bind="html: message"></p>
+    </div>
+    <!-- /ko -->
+    <div class="box box-information cust-personal-info">
+        <?php $customer = $block->getCustomer(); ?>
+        <strong class="box-title">
+            <span><?= $escaper->escapeHtml(__('Personal Information')) ?></span>
+            <?php if ($allowToRemoveRequest): ?>
+            <label class="action-remove">
+                <a data-bind="click: requestRemove,
+                    attr:{'customer-id' : '<?= $escaper->escapeHtml($customer->getId())?>'}"></a>
+            </label>
+            <?php endif; ?>
+        </strong>
+        <div class="box-content">
+                <label>
+                    <strong><?= $escaper->escapeHtml(__('Name: ')) ?></strong>
+                    <?= $escaper->escapeHtml($customer->getName()); ?>
+                </label>
+                <label>
+                    <strong><?= $escaper->escapeHtml(__('Email: ')) ?></strong>
+                    <?= $escaper->escapeHtml($customer->getEmail()); ?>
+                </label>
+                <!-- Add more fields as needed -->
+        </div>
+
+    </div>
+    <div class="box box-information cust-order-info">
+        <strong class="box-title">
+            <span><?= $escaper->escapeHtml(__('Order History')) ?></span>
+        </strong>
+        <div class="box-content">
+            <?php $orders = $block->getOrders(); ?>
+
+                <?php foreach ($orders as $order): ?>
+                    <div class="order-rows">
+                        <div class="order-links">
+                            <label data-bind="click: toggleVisibility,
+                                                attr:{'order-id' : '<?= $escaper->escapeHtml($order->getId());?>'}">
+                                <?= $escaper->escapeHtml(__('Order #')).
+                                        $escaper->escapeHtml($order->getIncrementId()); ?>
+                            </label>
+
+                            <div class="action">
+                                <label class="view">
+                                    <a data-bind="click: toggleVisibility,
+                                            attr:{'order-id' : '<?= $escaper->escapeHtml($order->getId());?>'}"
+                                            title="<?= $escaper->escapeHtml(__('View Order')); ?>"
+                                            alt="<?= $escaper->escapeHtml(__('View Order')); ?>"></a>
+                                </label>
+
+                                <?php if ($allowToRemoveRequest): ?>
+                                    <label class="remove">
+                                        <a data-bind="click: requestRemove,
+                                            attr:{'order-id':'<?= $escaper->escapeHtml($order->getIncrementId());?>',
+                                            'customer-id':'<?= $escaper->escapeHtml($order->getCustomerId())?>'}"
+                                            title="<?= $escaper->escapeHtml(__('Request to Remove')); ?>"
+                                            alt="<?= $escaper->escapeHtml(__('Request to Remove')); ?>"></a>
+                                    </label>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="order-details order-details-<?= $escaper->escapeHtml($order->getId());?>">
+                            <h3><?= $escaper->escapeHtml(__('Order Information')); ?></h3>
+                            <label>
+                                <strong><?= $escaper->escapeHtml(__('Order Status : '))?></strong>
+                                <?= $escaper->escapeHtml($order->getStatus()); ?>
+                            </label>
+                            <label>
+                                <strong><?= $escaper->escapeHtml(__('Order Total : '))?></strong>
+                                <?= $escaper->escapeHtml($order->getOrderCurrencyCode().$order->getGrandTotal()); ?>
+                            </label>
+                            <label>
+                                <strong><?= $escaper->escapeHtml(__('Payment From : '))?></strong>
+                                <?= $escaper->escapeHtml($order->getPayment()->getMethodInstance()->getTitle()); ?>
+                            </label>
+                            <label>
+                                <strong><?= $escaper->escapeHtml(__('Shipping Method : '))?></strong>
+                                <?= $escaper->escapeHtml($order->getShippingDescription()); ?>
+                            </label>
+                            <label>
+                                <strong><?= $escaper->escapeHtml(__('Shipping Address : '))?></strong>
+                                <br>
+                                <?= $viewModel->getAddressHtml($order); ?>
+                            </label>
+                            <!-- Add more fields as needed -->
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+        </div>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+        <?php endif ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                        "customer-information": {
+                            "component": "SK_CustomerInformation/js/customer_info"
+                        }
+                    }
+                }
+            }
+    }
+</script>

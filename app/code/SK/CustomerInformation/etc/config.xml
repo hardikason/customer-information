@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customer>
+            <information>
+                <enable>1</enable>
+                <allow_to_remove>1</allow_to_remove>
+                <request_email_to>sonalikosrabe@outlook.com</request_email_to>
+                <request_email_to_name>Sonali Kosrabe</request_email_to_name>
+                <email_template_to_remove_request>customer_information_email_template_to_delete_request</email_template_to_remove_request>
+                <request_email_subject>Customer's Information Remove Request</request_email_subject>
+            </information>
+        </customer>
+    </default>
+</config>

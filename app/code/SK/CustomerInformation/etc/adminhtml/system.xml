@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer">
+            <group id="information" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_to_remove" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow to remove customer information</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will allow customer to request for removing their personal details.</comment>
+                </field>
+                <field id="request_email_to" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Request receiver email</label>
+                    <comment>Configured emails will receive the customer request.</comment>
+                </field>
+                <field id="request_email_to_name" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Request receiver name</label>
+                </field>
+                <field id="email_template_to_remove_request" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Request email template</label>
+                    <source_model>SK\CustomerInformation\Model\Config\Source\Email\Template</source_model>
+                    <comment>Configured emails will receive the customer request.</comment>
+                </field>
+                <field id="request_email_subject" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Request email subject</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
