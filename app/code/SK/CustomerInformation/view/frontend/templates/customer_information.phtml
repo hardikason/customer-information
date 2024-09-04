@@ -44,9 +44,9 @@ $allowToRemoveRequest = $viewModel->getAllowToRemoveRequest();
             <span><?= $escaper->escapeHtml(__('Order History')) ?></span>
         </strong>
         <div class="box-content">
-            <?php $orders = $block->getOrders(); ?>
+            <?php $orders = $viewModel->getCustomerOrders($customer->getId()); ?>
 
-                <?php foreach ($orders as $order): ?>
+                <?php foreach ($orders->getItems() as $order): ?>
                     <div class="order-rows">
                         <div class="order-links">
                             <label data-bind="click: toggleVisibility,

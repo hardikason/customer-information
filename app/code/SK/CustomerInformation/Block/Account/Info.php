@@ -3,7 +3,7 @@ namespace SK\CustomerInformation\Block\Account;
 
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Customer\Model\Session as CustomerSession;
-use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
+use SK\CustomerInformation\ViewModel\CustomerInformation as CustomerInformationViewModel;
 
 class Info extends \Magento\Framework\View\Element\Template
 {
@@ -12,27 +12,27 @@ class Info extends \Magento\Framework\View\Element\Template
      */
     protected $customerSession;
     /**
-     * @var OrderCollectionFactory
+     * @var CustomerInformationViewModel
      */
-    protected $orderCollectionFactory;
+    protected $customerInformationViewModel;
 
     /**
      * __construct
      *
      * @param Context $context
      * @param CustomerSession $customerSession
-     * @param OrderCollectionFactory $orderCollectionFactory
+     * @param CustomerInformationViewModel $customerInformationViewModel
      * @param array $data
      */
     public function __construct(
         Context $context,
         CustomerSession $customerSession,
-        OrderCollectionFactory $orderCollectionFactory,
+        CustomerInformationViewModel $customerInformationViewModel,
         array $data = []
     ) {
 
         $this->customerSession = $customerSession;
-        $this->orderCollectionFactory = $orderCollectionFactory;
+        $this->customerInformationViewModel = $customerInformationViewModel;
 
         parent::__construct($context, $data);
     }
@@ -60,10 +60,14 @@ class Info extends \Magento\Framework\View\Element\Template
         parent::_prepareLayout();
         $this->pageConfig->getTitle()->set(__('Customer Information'));
 
-        if ($this->getOrders()->getSize()) {
+        $customerId = $this->customerSession->getCustomer()->getId();
+
+        $orders = $this->customerInformationViewModel->getCustomerOrders($customerId);
+
+        if ($orders->getSize()) {
             $pager = $this->getLayout()->createBlock(\Magento\Theme\Block\Html\Pager::class, 'customer.orders.pager')
                 ->setShowPerPage(true)
-                ->setCollection($this->getOrders());
+                ->setCollection($orders);
             $this->setChild('pager', $pager);
         }
 
@@ -78,28 +82,6 @@ class Info extends \Magento\Framework\View\Element\Template
     public function getCustomer()
     {
         return $this->customerSession->getCustomer();
-    }
-
-    /**
-     * Get Orders
-     *
-     * @return \Magento\Sales\Model\ResourceModel\Order\Collection
-     */
-    public function getOrders()
-    {
-        $page = ($this->getRequest()->getParam('p')) ? (int) $this->getRequest()->getParam('p') : 1;
-        $pageSize = ($this->getRequest()->getParam('limit')) ? (int) $this->getRequest()->getParam('limit') : 10;
-
-        $customerId = $this->customerSession->getCustomerId();
-        $orderCollection = $this->orderCollectionFactory->create()
-            ->addFieldToSelect('*')
-            ->addFieldToFilter('customer_id', $customerId)
-            ->setOrder('created_at', 'desc');
-
-        $orderCollection->setCurPage($page);
-        $orderCollection->setPageSize($pageSize);
-
-        return $orderCollection;
     }
 
     /**
