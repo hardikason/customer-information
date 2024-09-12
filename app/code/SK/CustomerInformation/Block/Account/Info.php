@@ -38,19 +38,6 @@ class Info extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Generate cache key info. This should be unique for each cacheable block.
-     *
-     * @return array
-     */
-    public function getCacheKeyInfo()
-    {
-        return [
-            'CUSTOMER_INFO_',
-            microtime()
-        ];
-    }
-
-    /**
      * _prepareLayout
      *
      * @return $this
@@ -58,7 +45,6 @@ class Info extends \Magento\Framework\View\Element\Template
     protected function _prepareLayout()
     {
         parent::_prepareLayout();
-        $this->pageConfig->getTitle()->set(__('Customer Information'));
 
         $customerId = $this->customerSession->getCustomer()->getId();
 

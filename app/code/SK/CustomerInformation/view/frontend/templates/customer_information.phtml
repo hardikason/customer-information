@@ -78,7 +78,7 @@ $allowToRemoveRequest = $viewModel->getAllowToRemoveRequest();
                             <h3><?= $escaper->escapeHtml(__('Order Information')); ?></h3>
                             <label>
                                 <strong><?= $escaper->escapeHtml(__('Order Status : '))?></strong>
-                                <?= $escaper->escapeHtml($order->getStatus()); ?>
+                                <?= $escaper->escapeHtml($order->getStatusLabel()); ?>
                             </label>
                             <label>
                                 <strong><?= $escaper->escapeHtml(__('Order Total : '))?></strong>

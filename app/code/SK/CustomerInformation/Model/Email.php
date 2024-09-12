@@ -62,37 +62,37 @@ class Email
      */
     public function sendRemoveRequestEmail($customerId, $orderId = null)
     {
-        $this->inlineTranslation->suspend();
-
-        $store = $this->storeManager->getStore();
-
-        $customer = $this->customerRepositoryInterface->getById($customerId);
         $templateId = $this->helperData->getConfigValue(HelperData::XML_PATH_EMAIL_TEMPLATE_TO_REMOVE_REQUEST);
-        $emailTo = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_TO);
-        $emailToName = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_TO_NAME);
-        $subject = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_SUBJECT);
 
-        // template variables pass here
-        $templateVars = [
-            'subject' => $subject,
-            'emailTo' => $emailTo,
-            'emailToName' => $emailToName,
-            'customer' => [
-                'name' => $customer->getFirstname().' '.$customer->getLastname(),
-                'email' => $customer->getEmail()
-                ],
-            'orderId' => $orderId
-        ];
+        if ($templateId) {
+            $store = $this->storeManager->getStore();
 
-        $transport = $this->transportBuilder
-            ->setTemplateIdentifier($templateId)
-            ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => $store->getId()])
-            ->setTemplateVars($templateVars)
-            ->setFromByScope('general', $store->getId())
-            ->addTo($emailTo, $emailToName)
-            ->getTransport();
+            $customer = $this->customerRepositoryInterface->getById($customerId);
+            $emailTo = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_TO);
+            $emailToName = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_TO_NAME);
+            $subject = $this->helperData->getConfigValue(HelperData::XML_PATH_REQUEST_EMAIL_SUBJECT);
 
-        $transport->sendMessage();
-        $this->inlineTranslation->resume();
+            // template variables pass here
+            $templateVars = [
+                'subject' => $subject,
+                'emailTo' => $emailTo,
+                'emailToName' => $emailToName,
+                'customer' => [
+                    'name' => $customer->getFirstname().' '.$customer->getLastname(),
+                    'email' => $customer->getEmail()
+                    ],
+                'orderId' => $orderId
+            ];
+
+            $transport = $this->transportBuilder
+                ->setTemplateIdentifier($templateId)
+                ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => $store->getId()])
+                ->setTemplateVars($templateVars)
+                ->setFromByScope('general', $store->getId())
+                ->addTo($emailTo, $emailToName)
+                ->getTransport();
+
+            $transport->sendMessage();
+        }
     }
 }
