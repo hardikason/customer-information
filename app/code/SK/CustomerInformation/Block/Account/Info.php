@@ -63,7 +63,7 @@ class Info extends \Magento\Framework\View\Element\Template
     /**
      * Get Customer
      *
-     * @return \Magento\Customer\Model\ResourceModel\Customer
+     * @return \Magento\Customer\Model\Customer
      */
     public function getCustomer()
     {
